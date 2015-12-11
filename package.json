@@ -1,0 +1,30 @@
+{
+  "name": "hubot-skyweb",
+  "version": "0.0.1",
+  "description": "A Skyweb adapter for hubot",
+  "main": "./src/skyweb",
+  "keywords": [
+    "hubot",
+    "adapter",
+    "skype",
+    "skyweb"
+  ],
+  "author": "Eligijus Vitkauskas <eligijusvitkauskas@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/EllisV/hubot-skyweb.git"
+  },
+  "bugs": {
+    "url": "https://github.com/EllisV/hubot-skyweb/issues"
+  },
+  "dependencies": {
+    "skyweb": "^0.0.2"
+  },
+  "peerDependencies": {
+    "hubot": ">=2.0"
+  },
+  "devDependencies": {
+    "coffee-script": ">=1.2.0"
+  }
+}
