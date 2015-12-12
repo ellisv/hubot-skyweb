@@ -5,6 +5,7 @@
   "main": "./src/skyweb",
   "keywords": [
     "hubot",
+    "hubot-scripts",
     "adapter",
     "skype",
     "skyweb"
