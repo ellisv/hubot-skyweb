@@ -2,6 +2,8 @@
 
 This is a [Skype](http://www.skype.com/) adapter for [Hubot](https://hubot.github.com/) using [Skyweb](https://github.com/ShyykoSerhiy/skyweb).
 
+[![Build Status](https://travis-ci.org/EllisV/hubot-skyweb.svg)](https://travis-ci.org/EllisV/hubot-skyweb)
+
 ## Why another Skype adapter?
 
 There are two popular approaches for having scriptable Skype:
