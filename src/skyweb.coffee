@@ -3,16 +3,37 @@ Skyweb = require 'skyweb'
 {Adapter, TextMessage} = require 'hubot'
 
 class SkywebAdapter extends Adapter
-
+  # Constructor.
+  #
+  # robot  - A Robot instance.
+  # skyweb - A Skyweb instance.
   constructor: (@robot, @skyweb) ->
     @lastMessageIds = Array.apply null, length: 20
 
+  # Public: Send message to Skype.
+  #
+  # envelope - A Object with message, room and user details.
+  # strings  - One or more Strings for each message to send.
+  #
+  # Returns nothing.
   send: (envelope, strings...) ->
     @skyweb.sendMessage envelope.user.room, str for str in strings
 
+  # Public: Build a reply message and send it via Skype.
+  #
+  # envelope - A Object with message, room and user details.
+  # strings  - One or more Strings for each reply to send.
+  #
+  # Returns nothing.
   reply: (envelope, strings...) ->
     @send envelope, strings.map((str) -> "@#{envelope.user.name}: #{str}")...
 
+  # Public: Bootstrap a Skyweb and run a bot.
+  #
+  # Login parameters should be passed via environment variables
+  # HUBOT_SKYPE_USERNAME and HUBOT_SKYPE_PASSWORD.
+  #
+  # Returns nothing.
   run: ->
     username = process.env.HUBOT_SKYPE_USERNAME
     throw new Error 'Provide username in HUBOT_SKYPE_USERNAME' unless username
