@@ -6,8 +6,7 @@ class SkywebAdapter extends Adapter
   # Constructor.
   #
   # robot  - A Robot instance.
-  # skyweb - A Skyweb instance.
-  constructor: (@robot, @skyweb) ->
+  constructor: (@robot) ->
     @lastMessageIds = Array.apply null, length: 20
 
   # Public: Send message to Skype.
@@ -35,34 +34,44 @@ class SkywebAdapter extends Adapter
   #
   # Returns nothing.
   run: ->
-    username = process.env.HUBOT_SKYPE_USERNAME
-    throw new Error 'Provide username in HUBOT_SKYPE_USERNAME' unless username
+    @username = process.env.HUBOT_SKYPE_USERNAME
+    throw new Error 'Provide username in HUBOT_SKYPE_USERNAME' unless @username
     password = process.env.HUBOT_SKYPE_PASSWORD
     throw new Error 'Provide password in HUBOT_SKYPE_PASSWORD' unless password
 
-    @skyweb.login(username, password).then =>
-      @robot.logger.debug "Successfully logged in to Skype as #{username}"
+    @skyweb = new Skyweb
+
+    @skyweb.login(@username, password).then =>
+      @robot.logger.debug "Successfully logged in to Skype as #{@username}"
       @emit 'connected'
 
     @skyweb.messagesCallback = (messages) =>
-      for message in messages
-        continue if message.resourceType is not 'NewMessage' or
-                    message.resource?.messagetype not in ['Text', 'RichText'] or
-                    message.resource.id in @lastMessageIds
+      @receiveSkywebMessages messages
 
-        @lastMessageIds.shift
-        @lastMessageIds.push message.resource.id
+  # Public: Receive Skyweb messages.
+  #
+  # messages - An Array of Skyweb messages.
+  #
+  # Returns nothing.
+  receiveSkywebMessages: (messages) ->
+    for message in messages
+      continue if message.resourceType is not 'NewMessage' or
+                  message.resource?.messagetype not in ['Text', 'RichText'] or
+                  message.resource.id in @lastMessageIds
 
-        userId = message.resource.from.match(/contacts\/\d+:(.+)$/)[1]
+      @lastMessageIds.shift
+      @lastMessageIds.push message.resource.id
 
-        throw new Error 'Unable to parse user id' if userId is null
-        continue if userId is username
+      userId = message.resource.from.match(/contacts\/\d+:(.+)$/)[1]
 
-        room = message.resource.conversationLink.match(/conversations\/(\d+:.+)$/)[1]
-        user = @robot.brain.userForId userId, room: room
+      throw new Error 'Unable to parse user id' if userId is null
+      continue if userId is @username
 
-        # TODO: Implement EnterMessage, LeaveMessage and others.
-        @receive new TextMessage user, message.resource.content, message.resource.id
+      room = message.resource.conversationLink.match(/conversations\/(\d+:.+)$/)[1]
+      user = @robot.brain.userForId userId, room: room
+
+      # TODO: Implement EnterMessage, LeaveMessage and others.
+      @receive new TextMessage user, message.resource.content, message.resource.id
 
 exports.use = (robot) ->
-  new SkywebAdapter robot, new Skyweb
+  new SkywebAdapter robot

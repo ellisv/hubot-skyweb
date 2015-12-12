@@ -3,6 +3,9 @@
   "version": "0.0.1",
   "description": "A Skyweb adapter for hubot",
   "main": "./src/skyweb",
+  "scripts": {
+    "test": "mocha --compilers coffee:coffee-script/register"
+  },
   "keywords": [
     "hubot",
     "hubot-scripts",
@@ -23,9 +26,12 @@
     "skyweb": "^0.0.2"
   },
   "peerDependencies": {
-    "hubot": ">=2.0"
+    "hubot": "^2.0"
   },
   "devDependencies": {
-    "coffee-script": ">=1.2.0"
+    "chai": "^3.4.1",
+    "coffee-script": ">=1.2.0",
+    "hubot": "^2.0",
+    "mocha": "^2.3.4"
   }
 }
