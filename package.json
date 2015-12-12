@@ -1,7 +1,7 @@
 {
   "name": "hubot-skyweb",
-  "version": "0.0.1",
-  "description": "A Skyweb adapter for hubot",
+  "version": "0.0.2",
+  "description": "A Skype adapter for Hubot using Skyweb",
   "main": "./src/skyweb",
   "scripts": {
     "test": "mocha --compilers coffee:coffee-script/register"
