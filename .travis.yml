@@ -1,5 +1,14 @@
 language: node_js
 node_js:
-  - "4"
-  - "0.12"
-  - "0.10"
+  - '4.0'
+  - '0.12'
+  - '0.10'
+
+deploy:
+  provider: npm
+  email: eligijusvitkauskas@gmail.com
+  api_key:
+    secure: AkPPzNmUXzzrMbswtDmfky2/Bye5xS65URlFxzO/NiD0jk2rycgOgp8jBQbWoF8eTL4+HDo8BJTDhRF4t94oLsIPhtSNlLbeyMN6994lIgjZvoSlXGzdp9TTwk6G6TiYtHnESdlQ7FBJS5cWw6soicju8dCr/gWrjamhN8ylXco2ccrwxU0nEA4ARL/yw3GwByQ3ykiRI6q6ztmLBOughDfEEUS1z4RB6+tpX3ZXc0bWB2bstWppt9XLMGOBtC3CmLJmPr8hBiGhAM6w8F3mV7TcfuCQ8+dTR3Y2xAKjla4GDXXT8vr/ZRboPn4gBaCvQHcCMxkWtUEl2op/ZqSA3LQK9wB1eEHt6CAWRfX7dlrDIcS5o9z+rNnHgpMquWaGfoexeLQsFvknpuGH0goLDseo5becuTyxAkWPtYO7mvkqNGgNOemLWbPU9jpj2bAlzSfAOb6jDIO9dk2WnVxXParhKrW4V0lUx3JcppUjuB4kHAxipi7jvUwrPYpK02AYqsvxfinuWBiERdMHF7OvnrFtOxTUI8dWf3rOM0ofOV61bX9oAi9nFpMgVlWeKrt7+P1D6TvvsjSnJYZqk41RvQqUzukNvxmHFAfExvkuaR5YlOqK+YcqsQ6BzaTiZTxoLvgBzMlTXKJjr89LWSar8+cG9OnJMUmL4C+6fm6ldVg=
+  on:
+    tags: true
+    repo: EllisV/hubot-skyweb
