@@ -16,7 +16,7 @@ class SkywebAdapter extends Adapter
   #
   # Returns nothing.
   send: (envelope, strings...) ->
-    @skyweb.sendMessage envelope.user.room, str for str in strings
+    @skyweb.sendMessage envelope.user.room, @escapeSendMessage(str) for str in strings
 
   # Public: Build a reply message and send it via Skype.
   #
@@ -72,6 +72,14 @@ class SkywebAdapter extends Adapter
 
       # TODO: Implement EnterMessage, LeaveMessage and others.
       @receive new TextMessage user, message.resource.content, message.resource.id
+
+  # Private: Escape message to fit Skype API.
+  #
+  # message - A message to escape.
+  #
+  # Returns escaped message.
+  escapeSendMessage: (message) ->
+    String(message).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
 
 exports.use = (robot) ->
   new SkywebAdapter robot
