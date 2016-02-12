@@ -16,7 +16,7 @@ class SkywebAdapter extends Adapter
   #
   # Returns nothing.
   send: (envelope, strings...) ->
-    @skyweb.sendMessage envelope.user.room, @escapeSendMessage(str) for str in strings
+    @skyweb.sendMessage envelope.room, @escapeSendMessage(str) for str in strings
 
   # Public: Build a reply message and send it via Skype.
   #
