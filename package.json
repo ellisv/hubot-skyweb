@@ -1,6 +1,6 @@
 {
   "name": "hubot-skyweb",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A Skype adapter for Hubot using Skyweb",
   "main": "./src/skyweb",
   "scripts": {
