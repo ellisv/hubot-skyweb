@@ -23,7 +23,7 @@
     "url": "https://github.com/EllisV/hubot-skyweb/issues"
   },
   "dependencies": {
-    "skyweb": "^0.0.2"
+    "skyweb": "^0.0.4"
   },
   "peerDependencies": {
     "hubot": "^2.0"
