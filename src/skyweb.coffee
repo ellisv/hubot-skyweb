@@ -42,6 +42,7 @@ class SkywebAdapter extends Adapter
     @skyweb = new Skyweb
 
     @skyweb.login(@username, password).then =>
+      @skyweb.setStatus 'Online'
       @robot.logger.debug "Successfully logged in to Skype as #{@username}"
       @emit 'connected'
 
